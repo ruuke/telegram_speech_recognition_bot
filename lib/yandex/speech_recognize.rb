@@ -10,13 +10,13 @@ module Yandex
           req.body = voice_file
         end
 
-        handle_response(response).body.split('"')[3]
+        JSON.parse(handle_response(response).body)['result']
       end
 
       private
 
       def connection
-        conn = Faraday.new(
+        Faraday.new(
           url: 'https://stt.api.cloud.yandex.net/speech/v1/stt:recognize',
           params: {
             folderId: ENV['YC_FOLDER_ID'],
@@ -24,7 +24,7 @@ module Yandex
           },
           headers: {
             'Content-Type' => 'audio/ogg',
-            'Authorization' => "Bearer #{ENV['YC_IAM_TOKEN']}"
+            'Authorization' => "Bearer #{Auth.access_token}"
           }
         )
       end

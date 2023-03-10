@@ -2,6 +2,7 @@
 
 require 'telegram/bot'
 require 'dotenv/load'
+require 'json'
 Dir['./**/*.rb'].sort.each { |file| require file }
 
 Telegram::Bot::Client.run(ENV['TELEGRAM_API_KEY']) do |bot|

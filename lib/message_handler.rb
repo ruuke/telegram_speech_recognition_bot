@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageHandler
   def self.call(message, bot)
     if message.voice
@@ -12,6 +14,6 @@ class MessageHandler
       bot.api.send_message(chat_id: message.chat.id,
                            text: 'Please send voice message and I will translate it into text message.')
     end
-    rescue StandardError => e; puts e
+  rescue StandardError => e; puts e
   end
 end
